@@ -1,20 +1,8 @@
-import sqlite3
 from nltk.tokenize import word_tokenize
 import nltk
 from nltk.corpus import wordnet
 
-conn = sqlite3.connect('review_anime.db')
-
-opinions = {}
-opinion_list = set()
-cursor = conn.execute("SELECT feature, opinion from feature_opinion")
-for row in cursor:
-	curr_opinion = row[1].split('|')[:-1]
-	opinions[row[0]] = curr_opinion
-	for words in curr_opinion :
-		opinion_list.add(words.lower())
-
-seed = {'top':1,'unpredictable':1,'large':1,'admirable':1,'addictive':1, 'nice':1, 'funny':1, 'boring': -1}
+from Database import Database
 
 def OrientationSearch(adj_list, seed_list):
 	for word in adj_list:
@@ -43,8 +31,28 @@ def OrientationPrediction(adj_list, seed_list):
 		if s1 == s2 :
 			break
 
-OrientationPrediction(opinion_list, seed)
+# First config for read
+column = ['feature', 'opinion'] # column
+table_name = 'feature_opinion' # table name
+
+# Get data from database
+db = Database('review_anime.db')
+data = db.read(table_name, column)
+
+# Preprocess the data
+opinions = {}
+opinion_list = set()
 opinion_count = {}
+seed = {'top':1,'unpredictable':1,'large':1,'admirable':1,'addictive':1, 'nice':1, 'funny':1, 'boring': -1}
+
+# Preprocess the data
+for row in data:
+	curr_opinion = row[1].split('|')[:-1]
+	opinions[row[0]] = curr_opinion
+	for words in curr_opinion :
+		opinion_list.add(words.lower())
+
+OrientationPrediction(opinion_list, seed)
 
 for key in opinions.keys():
 	res = [0,0]
@@ -56,11 +64,13 @@ for key in opinions.keys():
 				res[1] += 1
 	opinion_count[key] = res
 
-sql = ''' insert into opinion_orientation(id_anime,feature_name,good,bad) values(?,?,?,?) '''
-cnt = conn.cursor()
+print(opinion_count)
 
+column_out = ['id_anime','feature_name','good', 'bad']
+table_name_out = 'opinion_orientation'
 for opinion in opinion_count.keys() :
-	cnt.execute(sql, (5114, opinion, opinion_count[opinion][0], opinion_count[opinion][1]))
+	data = (5114, opinion, opinion_count[opinion][0], opinion_count[opinion][1])
+	db.insert(table_name_out, column_out, data)
 
-conn.commit()
-conn.close()
+db.commit()
+db.close()
