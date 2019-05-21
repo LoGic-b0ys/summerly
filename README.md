@@ -1,17 +1,14 @@
-![](https://ibb.co/HqTyg6b)
+![](https://i.ibb.co/7KtDyPZ/logo.png)
 #### <p align="center">**Summarize your review**</p>
 ---
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#future-development">Future Development</a>
 </p>
 
 ---
-![](https://ibb.co/pXN5F91)
+![](https://i.ibb.co/4NC3r5F/ex.png)
 
 ## Key Features
 
