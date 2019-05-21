@@ -1,10 +1,14 @@
 from Review import Review
-from crawler import Crawler
+from Crawler import Crawler
 
-c = Crawler('review_anime.db', 'https://myanimelist.net/anime/4181/Clannad__After_Story/reviews')
-c.process()
-c.get_summary()
-c.setURL('https://myanimelist.net/anime/35247/Owarimonogatari_2nd_Season/reviews')
-c.process()
+c = Crawler('review_anime.db')
+url = input('Masukkan url: ')
+depth = int(input('Masukkan kedalaman: '))
+
+for i in range(2,depth+1):
+	c.setURL(url+'?p='+str(i))
+# 	c.process()
+
+print('Getting summary')
 c.get_summary()
 c.close()
