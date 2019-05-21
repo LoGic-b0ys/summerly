@@ -5,13 +5,15 @@ class Database:
 	def __init__(self, file_name) :
 		self.conn = sqlite3.connect(file_name)
 
-	def read(self, table_name, column) :
+	def read(self, table_name, column, where='') :
 		# Query formulation from a table_name and the column
 		query = "select "
 		for cell in column[:-1]:
 			query += cell + ', '
 		query += column[-1]
 		query += ' from ' + table_name
+
+		query += where
 
 		# Execute the query
 		cursor = self.conn.execute(query)
