@@ -11,8 +11,8 @@ class Review:
 	'''
 		This class provide interface to extract the feature and get the opinion text. This is our main process
 	'''
-	def __init__(self, file_name, id_anime, judul_anime) :
-		self.feature_list = set() # Our feature list
+	def __init__(self, file_name, id_anime, judul_anime, feature = []) :
+		self.feature_list = set(feature) # Our feature list
 		self.noun_list = [] # Our noun list use for transaction and mining the frequent feature
 		self.id_anime = id_anime
 
@@ -37,31 +37,32 @@ class Review:
 	'''
 	def extract_feature_list(self):
 
-		# Get the noun for each sentences
-		for sentence in self.sentences:
+		if len(self.feature_list) == 0:
+			# Get the noun for each sentences
+			for sentence in self.sentences:
 
-			for word in sentence.tagged :
-				if word[1] == 'NN' :
-					sentence.noun.append(word[0])
+				for word in sentence.tagged :
+					if word[1] == 'NN' :
+						sentence.noun.append(word[0])
 
-			# If the sentences didn't countain noun, it's just a dump sentences
-			if len(sentence.noun) > 0 :
-				sentence.opinion = True
-				self.noun_list.append(sentence.noun)
-			else :
-				sentence.opinion = False
+				# If the sentences didn't countain noun, it's just a dump sentences
+				if len(sentence.noun) > 0 :
+					sentence.opinion = True
+					self.noun_list.append(sentence.noun)
+				else :
+					sentence.opinion = False
 
 
-		# Use apriori method to mine the feature
-		association_rules = apriori(self.noun_list, min_support=0.001, min_confidence=0, min_lift=3, min_length=2)
-		association_results = list(association_rules)
+			# Use apriori method to mine the feature
+			association_rules = apriori(self.noun_list, min_support=0.001, min_confidence=0, min_lift=3, min_length=2)
+			association_results = list(association_rules)
 
-		features = []
+			features = []
 
-		for item in association_results:
-			pair = item[0] 
-			items = [x for x in pair]
-			self.feature_list.add(items[0])
+			for item in association_results:
+				pair = item[0] 
+				items = [x for x in pair]
+				self.feature_list.add(items[0])
 
 	'''
 		After mine the feature list we mine the opinion about that feature.
