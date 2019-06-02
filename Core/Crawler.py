@@ -3,8 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 # This is our library
-from Database import Database
-from Review import Review
+from Core.Database import Database
+from Tools.Review import Review
 
 
 '''

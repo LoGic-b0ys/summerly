@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{super()}} {{ title }}
+{% endblock %}
+
+{% block styles %}
+	{{super()}}
+
+	<style type="text/css">
+		.card-container{
+			display: flex;
+			flex-flow: row wrap;
+			margin-top: 60px;
+		}
+		.card {
+		  width: 150px;                 /* Set width of cards */
+		  display: flex;                /* Children use Flexbox */
+		  flex-direction: column;       /* Rotate Axis */
+		  border: 1px solid;    /* Set up Border */
+		  border-radius: 4px;           /* Slightly Curve edges */
+		  overflow: hidden;             /* Fixes the corners */
+		  margin: 5px;                  /* Add space between cards */
+		}
+
+		.good{
+			border-color: #0097a7;
+			color: #0097a7;
+		}
+
+		.bad{
+			border-color: #EF9A9A;
+			color: #D32F2F;
+		}
+
+		.card-header {
+		  text-align: center;
+		  font-size: 12px;
+		  font-weight: 600;
+		  border-bottom: 1px solid;
+		  padding: 5px 10px;
+		}
+
+		.card-main {
+		  display: flex;              /* Children use Flexbox */
+		  flex-direction: column;     /* Rotate Axis to Vertical */
+		  justify-content: center;    /* Group Children in Center */
+		  align-items: center;        /* Group Children in Center (on cross axis) */
+		  padding: 15px 0;            /* Add padding to the top/bottom */
+		}
+
+		.material-icons {
+		  font-size: 36px;
+		  margin-bottom: 12px;
+		}
+
+		.main-description {
+		  font-size: 12px;
+		  text-align: center;
+		}
+
+	</style>
+{% endblock %}
+
+{% block isi %}
+	<h1 class="text-center">{{ title }}</h1>
+	<div class="card-container">
+		{% for opinion in opinions %}
+			{% if opinion[1] >= opinion[2] %}
+				<div class="card good">
+				  <div class="card-header good">{{ opinion[0]|capitalize }}</div>
+				  <div class="card-main good">
+				    <i class="material-icons fa fa-thumbs-up"></i>
+				    <div class="main-description">
+				    	<p>Good : {{ opinion[1] }}</p>
+				    	<p>Bad : {{ opinion[2] }}</p>
+				    </div>
+				  </div>
+				</div>
+			{% else %}
+				<div class="card bad">
+				  <div class="card-header bad">{{ opinion[0]|capitalize }}</div>
+				  <div class="card-main bad">
+				    <i class="material-icons fa fa-thumbs-down"></i>
+				    <div class="main-description">
+				    	<p>Good : {{ opinion[1] }}</p>
+				    	<p>Bad : {{ opinion[2] }}</p>
+				    </div>
+				  </div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

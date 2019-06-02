@@ -1,7 +1,7 @@
-from Sentence import Sentence
-from Database import Database
+from Tools.Sentence import Sentence
+from Core.Database import Database
 from apyori import apriori # We use apriori to extract frequent feature from feature list
-from Feature import Feature
+from Tools.Feature import Feature
 
 class Review:
 	# First config for read
@@ -11,14 +11,13 @@ class Review:
 	'''
 		This class provide interface to extract the feature and get the opinion text. This is our main process
 	'''
-	def __init__(self, file_name, id_anime, judul_anime, feature = []) :
+	def __init__(self, file_name, id_anime, feature = []) :
 		self.feature_list = set(feature) # Our feature list
 		self.noun_list = [] # Our noun list use for transaction and mining the frequent feature
 		self.id_anime = id_anime
 
 		self.db = Database(file_name) # Our databse interface
 		data = self.db.read(self.table_name, self.column, ' WHERE anime_id='+id_anime)
-		self.judul_anime = judul_anime
 		self.sentences = []
 
 		# The review is consist a sentence class

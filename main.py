@@ -1,17 +1,5 @@
-from Review import Review
-# from Crawler import Crawler
+from Web.app import WebApp
 
-# c = Crawler('review_anime.db')
-# url = input('Masukkan url: ')
-# depth = int(input('Masukkan kedalaman: '))
+app = WebApp('review_anime.db')
 
-# for i in range(2,depth+1):
-# 	c.setURL(url+'?p='+str(i))
-# 	c.process()
-
-# print('Getting summary')
-# c.get_summary()
-# c.close()
-
-r = Review('review_anime.db', '9253', 'Steins Gate', ['story', 'character', 'art', 'sound'])
-r.get_summary()
+app.get_app().run()

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{super()}}Get an Article
+{% endblock %}
+
+{% block isi %}
+	<h1 class="text-center">Your Farnam URL</h1>
+	<div class="row">
+		<div class="container">
+			<form method="POST" action="{{ url_for('url') }}">
+				<div class="input-group">
+				  <span class="input-group-addon" id="basic-addon3">https://fs.blog/</span>
+				  <input type="text" class="form-control" aria-describedby="basic-addon3" name="url">
+			      <span class="input-group-btn">
+			        <button class="btn btn-primary" type="submit">WikiScout</button>
+			      </span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<h1>{{ data['title'] }}</h1>
+			<div class="content">
+				{{ data['content']|safe }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
