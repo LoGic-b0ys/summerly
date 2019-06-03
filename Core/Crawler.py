@@ -3,8 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 # This is our library
-from Database import Database
-from Review import Review
+from Core.Database import Database
+from Tools.Review import Review
 
 
 '''
@@ -93,9 +93,9 @@ class Crawler:
 	'''
 		The main summarization process is handled by the Review class and we call it from here
 	'''
-	def get_summary(self):
-		r = Review('review_anime.db', self.id_anime, self.title_anime)
-		r.get_summary()
+	def get_summary(self, feature_list):
+		r = Review('review_anime.db', self.id_anime, feature_list)
+		return r.get_summary()
 	'''
 		We close the browser and the database
 	'''

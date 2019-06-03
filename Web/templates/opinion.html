@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{super()}} {{ title }}
+{% endblock %}
+
+{% block isi %}
+	<h1 class="text-center">{{ title }}</h1>
+	<div class="card-container">
+		{% for opinion in opinions %}
+			{% if opinion[1] >= opinion[2] %}
+				<div class="card good">
+				  <div class="card-header good">{{ opinion[0]|capitalize }}</div>
+				  <div class="card-main good">
+				    <i class="material-icons fa fa-thumbs-up"></i>
+				    <div class="main-description">
+				    	<p>Good : {{ opinion[1] }}</p>
+				    	<p>Bad : {{ opinion[2] }}</p>
+				    </div>
+				  </div>
+				</div>
+			{% else %}
+				<div class="card bad">
+				  <div class="card-header bad">{{ opinion[0]|capitalize }}</div>
+				  <div class="card-main bad">
+				    <i class="material-icons fa fa-thumbs-down"></i>
+				    <div class="main-description">
+				    	<p>Good : {{ opinion[1] }}</p>
+				    	<p>Bad : {{ opinion[2] }}</p>
+				    </div>
+				  </div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 import nltk
 from nltk.corpus import wordnet
-from Database import Database
+from Core.Database import Database
 
 '''
 	This class provide the feature. Main goal of this class is to determine the oopinion orientation, count the opinion

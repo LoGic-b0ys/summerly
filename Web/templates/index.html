@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{super()}}Offline Anime Review
+{% endblock %}
+
+{% block isi %}
+	<h1 class="text-center">Offline Anime Summary</h1>
+	<div class="article-list">
+		{% for title in data_title %}
+			<a href="{{ url_for('anime', id = title[0]) }}"><h4>{{ title[1] }}</h4></a>
+		{% endfor %}
+	</div>
+{% endblock %}

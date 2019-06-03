@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{super()}}Get an Article
+{% endblock %}
+
+{% block isi %}
+	<h1 class="text-center">Input Anime Reviews</h1>
+	<div class="row">
+		<div class="container">
+			<form method="POST" action="{{ url_for('url') }}">
+				<div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon3">https://myanimelist.net/anime/</span>
+				  	<input type="text" class="form-control" aria-describedby="basic-addon3" name="url" id="url">
+			      	<span class="input-group-btn">
+			        	<button class="btn btn-primary" type="submit">Summerly</button>
+			      	</span>
+				</div>
+				<div class="form-group">
+					<label for="feature">Fitur <i class="text-right"><small>pisahkan dengan koma, kosongkan jika anda ingin fitur otomatis</small></i></label>
+					<input type="text" class="form-control" name="fitur" id="feature">
+				</div>
+				<div class="form-group">
+					<label for="depth">Kedalaman <i class="text-right"><small>default 5</small></i></label>
+					<input type="text" class="form-control" name="kedalaman" id="depth">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<h1>{{ data['title'] }}</h1>
+			<div class="card-container">
+				{% for opinion in data.keys() %}
+					{% if data[opinion][0] >= data[opinion][1] %}
+						<div class="card good">
+						  <div class="card-header good">{{ opinion|capitalize }}</div>
+						  <div class="card-main good">
+						    <i class="material-icons fa fa-thumbs-up"></i>
+						    <div class="main-description">
+						    	<p>Good : {{ data[opinion][0] }}</p>
+						    	<p>Bad : {{ data[opinion][1] }}</p>
+						    </div>
+						  </div>
+						</div>
+					{% else %}
+						<div class="card bad">
+						  <div class="card-header bad">{{ opinion|capitalize }}</div>
+						  <div class="card-main bad">
+						    <i class="material-icons fa fa-thumbs-down"></i>
+						    <div class="main-description">
+						    	<p>Good : {{ data[opinion][0] }}</p>
+						    	<p>Bad : {{ data[opinion][1] }}</p>
+						    </div>
+						  </div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
