@@ -4,11 +4,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-<<<<<<< HEAD
   <a href="#future-development">Future Development</a>
-=======
-  <a href="#future-development">Download</a>
->>>>>>> develop
 </p>
 
 ---
@@ -57,9 +53,5 @@ Still Brainstorming
 Contribute to this work by fork this repository. Don't forget to submit an issue first.
 
 ## Licence
-<<<<<<< HEAD
-GPL
-=======
 
 GPL
->>>>>>> develop
