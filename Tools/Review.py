@@ -119,8 +119,11 @@ class Review:
 	def get_summary(self):
 		self.extract_feature_list()
 		self.extract_feature_opinion()
+		res = {}
 		for i in self.feature_result:
-			i.view()
+			i.save()
+			res[i.feature] = (i.good, i.bad)
+		return res
 
 	# Save method
 	def save(self) :

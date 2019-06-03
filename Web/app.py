@@ -21,6 +21,30 @@ class WebApp:
 			opinion = db.read('opinion_orientation', ['feature_name', 'good', 'bad'], ' WHERE id_anime='+str(id))
 			return render_template('opinion.html', title = title, opinions = opinion)
 
+		@app.route('/input')
+		def input():
+			article_data = {}
+			return render_template('url.html', data=article_data)
+
+		@app.route('/url', methods = ['POST'])
+		def url():
+			c = Crawler('review_anime.db')
+			if request.method == 'POST':
+				url = request.form['url']
+				feature = [x.strip().lower() for x in request.form['fitur'].split(',')]
+				print(feature)
+				depth = request.form['kedalaman']
+				if depth == '' :
+					depth = 5
+				else :
+					depth = int(depth)
+			for x in range(1,depth):
+				c.setURL('https://myanimelist.net/anime/'+ url + '?p=' + str(x))
+				c.process()
+			res = c.get_summary(feature)
+			print(res)
+			return render_template('url.html', data=res)
+
 		Bootstrap(app)
 
 		self.webapp = app

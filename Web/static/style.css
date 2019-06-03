@@ -52,3 +52,56 @@ blockquote:before {
 blockquote p {
 	display: inline;
 }
+.form-group, .input-group{
+	margin-bottom: 24px;
+}
+.card-container{
+	display: flex;
+	flex-flow: row wrap;
+	margin-top: 60px;
+}
+.card {
+  width: 150px;                 /* Set width of cards */
+  display: flex;                /* Children use Flexbox */
+  flex-direction: column;       /* Rotate Axis */
+  border: 1px solid;    /* Set up Border */
+  border-radius: 4px;           /* Slightly Curve edges */
+  overflow: hidden;             /* Fixes the corners */
+  margin: 5px;                  /* Add space between cards */
+}
+
+.good{
+	border-color: #0097a7;
+	color: #0097a7;
+}
+
+.bad{
+	border-color: #EF9A9A;
+	color: #D32F2F;
+}
+
+.card-header {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid;
+  padding: 5px 10px;
+}
+
+.card-main {
+  display: flex;              /* Children use Flexbox */
+  flex-direction: column;     /* Rotate Axis to Vertical */
+  justify-content: center;    /* Group Children in Center */
+  align-items: center;        /* Group Children in Center (on cross axis) */
+  padding: 15px 0;            /* Add padding to the top/bottom */
+}
+
+.material-icons {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.main-description {
+  font-size: 12px;
+  text-align: center;
+}
